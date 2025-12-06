@@ -6,21 +6,11 @@ async function loadInput(): Promise<string> {
     return buffer.toString('utf-8');
 }
 
-export function solve(input: string): number {
-    const problemLines = input
-        .split('\n')
-        .filter(Boolean);
-
-    const lineLength = problemLines[0].length;
-
-    const operators = problemLines[problemLines.length - 1]
-        .split(/ +/).filter(Boolean);
-
-    const operandLines = problemLines.slice(0, problemLines.length - 1);
-
+function parseNumberGroups(operandLines: string[]) {
     const numberGroups = [];
+
     let numbers = [];
-    for (let j = lineLength; j >= 0; j--) {
+    for (let j = operandLines[0].length; j >= 0; j--) {
         let digits = '';
 
         for (let i = 0; i < operandLines.length; i++) {
@@ -38,6 +28,21 @@ export function solve(input: string): number {
             numbers = [];
         }
     }
+
+    return numberGroups;
+}
+
+export function solve(input: string): number {
+    const problemLines = input
+        .split('\n')
+        .filter(Boolean);
+
+    const operators = problemLines[problemLines.length - 1]
+        .split(/ +/).filter(Boolean);
+
+    const operandLines = problemLines.slice(0, problemLines.length - 1);
+
+    const numberGroups = parseNumberGroups(operandLines);
 
     let grandTotal = 0;
     for (let k = operators.length - 1; k >= 0; k--) {
