@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { solve } from '../../src/07/part1';
 
-describe('06', () => {
+describe('07', () => {
     it('solves', () => {
         const testInput = `
 .......S.......
